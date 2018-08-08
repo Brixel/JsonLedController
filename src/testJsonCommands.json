@@ -1,0 +1,13 @@
+{
+   "action": "controlLedStrip",
+   "actionData": {
+      "stripNum": 0,
+      "animation": 44
+   }
+}
+{
+   "action": "controlLedStrip",
+   "actionData": {
+      "brightness": 100
+   }
+}
