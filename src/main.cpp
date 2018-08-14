@@ -27,21 +27,21 @@ void setup() {
    Serial.begin(115200);
    Serial.println("Starting!");
    ws0.init();
-   ws0.setBrightness(255);
+   ws0.setBrightness(64);
    ws0.setSpeed(200);
-   ws0.setMode(1);
+   ws0.setMode(2);
    ws0.start();
 
    ws1.init();
-   ws1.setBrightness(255);
-   ws1.setSpeed(10);
+   ws1.setBrightness(64);
+   ws1.setSpeed(200);
    ws1.setMode(2);
    ws1.start();
 
    ws2.init();
-   ws2.setBrightness(255);
-   ws2.setSpeed(10);
-   ws2.setMode(10);
+   ws2.setBrightness(64);
+   ws2.setSpeed(200);
+   ws2.setMode(2);
    ws2.start();
 }
 
@@ -58,7 +58,7 @@ void HandleSerialInput() {
       //try to get json data
       //const size_t bufferSize = JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(3);
       DynamicJsonBuffer jsonBuffer(256);
-
+      Serial.printf("Received: %s\r\n", strSerialData.c_str());
       JsonObject& input = jsonBuffer.parse(strSerialData);
       if (input.success()) {
          DynamicJsonBuffer outputBuffer(128);
