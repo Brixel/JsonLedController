@@ -2,18 +2,22 @@
 #include <ArduinoJson.h>
 
 //Lights stuff
-#define LED1_COUNT 314
-#define LED1_PIN D5
+#define LED0_COUNT 314
+#define LED0_PIN D5
 
-#define LED2_COUNT 10
-#define LED2_PIN D6
+#define LED1_COUNT 10
+#define LED1_PIN D6
 
-#define LED3_COUNT 2
-#define LED3_PIN D7
+#define LED2_COUNT 2
+#define LED2_PIN D7
 
-WS2812FX ws0 = WS2812FX(LED1_COUNT, LED1_PIN, NEO_GRB + NEO_KHZ800);
-WS2812FX ws1 = WS2812FX(LED2_COUNT, LED2_PIN, NEO_GRB + NEO_KHZ800);
-WS2812FX ws2 = WS2812FX(LED3_COUNT, LED3_PIN, NEO_GRB + NEO_KHZ800);
+#define LED3_COUNT 12
+#define LED3_PIN D8
+
+WS2812FX ws0 = WS2812FX(LED0_COUNT, LED0_PIN, NEO_GRB + NEO_KHZ800);
+WS2812FX ws1 = WS2812FX(LED1_COUNT, LED1_PIN, NEO_RGB + NEO_KHZ800);
+WS2812FX ws2 = WS2812FX(LED2_COUNT, LED2_PIN, NEO_RGB + NEO_KHZ800);
+WS2812FX ws3 = WS2812FX(LED3_COUNT, LED3_PIN, NEO_GRB + NEO_KHZ800);
 
 //Serial stuff
 bool bSerialStringComplete = false;
@@ -43,12 +47,20 @@ void setup() {
    ws2.setSpeed(200);
    ws2.setMode(2);
    ws2.start();
+
+   ws3.init();
+   ws3.setBrightness(255);
+   ws3.setSpeed(2000);
+   ws3.setMode(14);
+   ws3.setColor(0xFF0000);
+   ws3.start();
 }
 
 void loop() {
    ws0.service();
    ws1.service();
    ws2.service();
+   ws3.service();
    serialEvent();
    HandleSerialInput();
 }
